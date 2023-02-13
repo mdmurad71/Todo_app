@@ -14,9 +14,20 @@ class Todopage extends StatefulWidget {
 
 class TodopageView extends State<Todopage> {
 
-  List TodoList= [
-    {'1': '1'}, {'1': '1'}
-  ];
+  List TodoList= [];
+  String Item= "";
+
+  InputChange(value){
+    setState(() {
+      Item = value ;
+    });
+  }
+
+  addList(){
+    setState(() {
+      TodoList.add({'item': Item});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +41,15 @@ class TodopageView extends State<Todopage> {
               flex: 10,
                child: Row(
                  children: [
-                   Expanded( flex: 80,  child: TextFormField(decoration: AppInputStyle('add input'),)),
+                   Expanded( flex: 80,  child: TextFormField(onChanged: (value){InputChange(value);} , decoration: AppInputStyle('add input'),)),
 
                    Expanded(
                        flex: 20,
                        child: ElevatedButton(
+
                          style: AppButtonStyle(),
                          child: Text("Add"),
-                         onPressed: (){},
+                         onPressed: (){addList();},
                        ))
                  ],
                )),
@@ -51,7 +63,7 @@ class TodopageView extends State<Todopage> {
                      child: sizedBox50(
                        Row(
                          children: [
-                           Expanded( flex: 80,   child: Text("item")),
+                           Expanded( flex: 80,   child: Text(TodoList[index]['item'].toString())),
                            Expanded(flex: 20, child: TextButton(onPressed: (){}, child: Icon(Icons.delete),))
                          ],
                        )
