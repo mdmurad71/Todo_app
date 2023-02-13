@@ -29,6 +29,12 @@ class TodopageView extends State<Todopage> {
     });
   }
 
+  removeItem(index){
+    setState(() {
+      TodoList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -64,7 +70,7 @@ class TodopageView extends State<Todopage> {
                        Row(
                          children: [
                            Expanded( flex: 80,   child: Text(TodoList[index]['item'].toString())),
-                           Expanded(flex: 20, child: TextButton(onPressed: (){}, child: Icon(Icons.delete),))
+                           Expanded(flex: 20, child: TextButton(onPressed: (){removeItem(index);}, child: Icon(Icons.delete),))
                          ],
                        )
                      ),
